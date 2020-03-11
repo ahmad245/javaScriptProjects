@@ -15,7 +15,7 @@ class Timer {
         this.tick();
         this.interval = setInterval(this.tick, 50)
         if ( this.onSatrt) {
-            this.onSatrt()
+            this.onSatrt(this.timeRemaining)
         }
     }
     tick=()=>{
@@ -25,7 +25,7 @@ class Timer {
         }
         this.timeRemaining=this.timeRemaining - .05;
         if ( this.onTick) {
-            this.onTick()
+            this.onTick(this.timeRemaining)
         }
        
     }
@@ -45,28 +45,3 @@ class Timer {
 
 
 }
-let sBtn=document.querySelector('#start');
-let pBtn=document.querySelector('#pause');
-let tInput=document.querySelector('#time');
-
-let circle=document.querySelector('#circle');
-let perimeter=circle.getAttribute('r') * 2 * Math.PI;
-
- circle.setAttribute('stroke-dasharray',perimeter);
- let currentOffset=0
-let time=new Timer(sBtn,pBtn,tInput,{
-    onSatrt(){
-        console.log('start');
-        circle.setAttribute('stroke-dashoffset',-50);
-        
-    },
-    onTick(){
-        console.log('tick');
-         currentOffset=currentOffset-50
-        circle.setAttribute('stroke-dashoffset',currentOffset);
-    },
-    onComplete(){
-        console.log('complete');
-        
-    }
-});
